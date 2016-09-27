@@ -69,10 +69,7 @@ public class RamlApp extends Application {
         btnTackht.setLayoutX(335);
         btnTackht.setLayoutY(110);
         btnTackht.setPrefWidth(162);
-        
-        btnTackht2.setText("إحتساب التخت بطريقة الشيخ المحسن");
-        btnTackht2.setLayoutX(335);
-        btnTackht2.setLayoutY(140);
+
         
         desc.setLayoutX(180);
         desc.setLayoutY(12);
@@ -107,7 +104,7 @@ public class RamlApp extends Application {
         answerBtn.setLayoutY(405);
         answerBtn.setBorder(Border.EMPTY);
         //-------------------------------------------------------------------------------//   
-        aPane.getChildren().addAll(btnTackht,btnTackht2,questBtn,boardBtn,desc,
+        aPane.getChildren().addAll(btnTackht,questBtn,boardBtn,desc,
                 house1,house2,house3,house4,house5,house6,house7,
                 house8,house9,house10,house11,house12,house13,
                 house14,house15,house16, h1Label, h2Label, h3Label, h4Label, h5Label,
@@ -252,129 +249,7 @@ public class RamlApp extends Application {
             }
         });
         
-        btnTackht2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-               
-                // Check if there are any unselected mothers from comboboxes
-                if (combo1.getSelectionModel().getSelectedIndex() == -1
-                        || combo2.getSelectionModel().getSelectedIndex() == -1
-                        || combo3.getSelectionModel().getSelectedIndex() == -1
-                        || combo4.getSelectionModel().getSelectedIndex() == -1) {
-                    return;
-
-                }
-  
-                // get the selected item's number from jComboBoxes into the array
-                String mothersFromComboBox[] = {combo1.getValue().toString(),
-                    combo2.getValue().toString(),
-                    combo3.getValue().toString(),
-                    combo4.getValue().toString()
-                };
-                    
-                RMethods rM1 = new RMethods();
-                int[][] mothers = new int[4][4];
-
-                // get the array by passing the name of the shakl
-                for(int i=0; i<=3; i++){
-                    switch (mothersFromComboBox[i]){
-                        case "جودله":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.JOOD_LAHO); break;
-                        case "أحيان":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.AHYAN); break;
-                        case "راية فرح":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.RAIT_FARAH); break; 
-                        case "البياض":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.BAIATH); break;     
-                        case "نقي الخد":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.NAKI_ALKHAD); break;     
-                        case "العتبة الخارجة":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.ATABA_KHARIGA); break; 
-                        case "الحمرة":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.HAMARA); break;      
-                        case "الأنكيس":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.INKEES); break; 
-                        case "نصرة خارجة":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.NASRA_KHARIGA); break; 
-                        case "العقلة":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.OOKLA); break;      
-                        case "الإجتماع":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.IGTEMAA); break;      
-                        case "نصرة داخلة":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.NASRA_DAKHLA); break;      
-                        case "الطريق":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.TARIQ); break;      
-                        case "القبض الخارج":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.QABTH_KHARIG); break;                    
-                        case "الجماعة":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.GAMAAA); break;      
-                        case "القبض الداخل":
-                            mothers[i] =  rM1.getShapeArray(RMethods.ShaklName.QABTH_DAKHEL); break;
-                        
-                            
-                    }
-                }
-
-             
-                // calculate the tackht by passing the mothers array
-                NewTackht  = Tackht2.calculateTakht(mothers);
-                 //int[][] NewTackht  = Tackht.calculateTakht(mothers);
-                
-                // If the tackht is already calculated then turn the switch on to be used when answring questions
-                tackhtOnOff = true;
- 
-                RMethods.ShaklName sName;
-                String imagePath="";
-                
-                Image image;// = new Image("");
-
-                String[] pathsArr = new String[16];
-
-                for(int i=0; i<16; i++){
-                    sName= rM1.getShaklName(NewTackht,i);
-
-                    switch(sName){
-                        case JOOD_LAHO:
-                            imagePath="resources/JOOD_LAHO.png"; break;
-                        case AHYAN:
-                            imagePath="resources/AHYAN.png";break;
-                        case RAIT_FARAH:
-                            imagePath="resources/RAIT_FARAH.png";break;
-                        case BAIATH:
-                            imagePath="resources/BAIATH.png";break;
-                        case NAKI_ALKHAD:
-                            imagePath="resources/NAKI_ALKHAD.png";break;
-                        case ATABA_KHARIGA:
-                            imagePath="resources/ATABA_KHARIGA.png";break;
-                        case HAMARA:
-                            imagePath="resources/HAMARA.png";break;
-                        case INKEES:
-                            imagePath="resources/INKEES.png"; break;     
-                        case NASRA_KHARIGA:
-                            imagePath="resources/NASRA_KHARIGA.png"; break;
-                        case OOKLA:
-                            imagePath="resources/OOKLA.png"; break;
-                        case IGTEMAA:
-                            imagePath="resources/IGTEMAA.png";break;     
-                        case NASRA_DAKHLA:
-                            imagePath="resources/NASRA_DAKHLA.png"; break;          
-                        case TARIQ:
-                            imagePath="resources/TARIQ.png";  break;  
-                        case QABTH_KHARIG:
-                            imagePath="resources/QABTH_KHARIG.png"; break;
-                        case GAMAAA:
-                            imagePath="resources/GAMAAA.png"; break;  
-                        case QABTH_DAKHEL:
-                            imagePath="resources/QABTH_DAKHEL.png"; break;
-                    }
-                    
-                    pathsArr[i] =  imagePath;
-                }
-               
-                imageAppearance(pathsArr);
-                
-            }
-        });
+        
             
         questBtn.setOnAction(new EventHandler<ActionEvent>() {  
             @Override
@@ -1131,7 +1006,6 @@ public class RamlApp extends Application {
 
         Button boardBtn = new Button();
         Button btnTackht = new Button();
-        Button btnTackht2 = new Button();
         Button getPShapesBtn = new Button();
         Button questBtn = new Button();
         Button answerBtn = new Button();
